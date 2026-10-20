@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#05070b">
+<title>Grupo Máfia Carioca | Loja</title>
+<style>
+:root{--bg:#05070b;--panel:#101722;--blue:#1685ff;--text:#f4f7fb;--muted:#aab6c6;--line:#243247}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% 0,#10264a 0,#05070b 42%);color:var(--text);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{padding:24px 16px 18px;text-align:center;border-bottom:1px solid var(--line)}.logo{width:100px;height:100px;border:2px solid var(--blue);border-radius:50%;display:grid;place-items:center;margin:0 auto 12px;background:#07101e;color:#fff;font-weight:900;font-size:28px;letter-spacing:2px;box-shadow:0 0 28px #1685ff55}.eyebrow{color:#72b5ff;text-transform:uppercase;letter-spacing:3px;font-size:11px;font-weight:800}h1{font-size:25px;margin:5px 0}header p{color:var(--muted);margin:4px auto;max-width:480px}
+main{max-width:850px;margin:auto;padding:18px 14px 44px}.notice{border:1px solid #24518a;background:#0b1b31;padding:12px;border-radius:12px;color:#cfe5ff;font-size:13px;margin-bottom:16px}
+h2{font-size:19px;margin:24px 0 12px}.models{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.model{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:12px 5px;text-align:center;color:var(--text);cursor:pointer}.model.active{border:2px solid var(--blue);background:#0d2441}.shirt{height:74px;display:grid;place-items:center;font-size:40px}.model strong{display:block;font-size:13px}.model small{color:var(--muted);font-size:11px}
+.card{background:#0c111a;border:1px solid var(--line);border-radius:15px;padding:15px;margin:12px 0}.field{display:block;margin:12px 0 5px;font-weight:650;font-size:13px}input,select,textarea{width:100%;padding:12px;border:1px solid #34445b;border-radius:10px;background:#080d14;color:var(--text);font:inherit}input[type=checkbox]{width:auto}.choices{display:flex;flex-wrap:wrap;gap:8px}.choice{border:1px solid #34445b;border-radius:999px;padding:8px 12px;cursor:pointer;background:#0a1019;color:var(--text);font-size:13px}.choice.active{background:#123966;border-color:var(--blue);box-shadow:0 0 0 1px var(--blue)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.btn{border:0;border-radius:11px;padding:13px 15px;background:var(--blue);color:white;font-weight:800;font-size:15px;width:100%;cursor:pointer;margin-top:10px}.btn.secondary{background:#172335;border:1px solid #34445b}.btn:active{transform:scale(.99)}.muted{color:var(--muted);font-size:12px}.summary{white-space:pre-wrap;background:#070b11;padding:12px;border-radius:10px;border:1px dashed #34445b;font-size:13px}.price{font-size:22px;font-weight:900;color:#83bdff}.footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
+@media(max-width:420px){.models{gap:6px}.model{padding:9px 2px}.shirt{font-size:34px;height:62px}.model strong{font-size:11px}.row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo" aria-label="Logo provisória GMC">GMC</div>
+  <div class="eyebrow">Bem-vindos</div>
+  <h1>Grupo Máfia Carioca</h1>
+  <p>Escolha seu modelo, cor e tamanho. Vista as cores do grupo!</p>
+</header>
+<main>
+  <div class="notice"><strong>Versão inicial:</strong> esta página é o catálogo demonstrativo. O Pix real, confirmação automática, armazenamento de pedidos e e-mails serão ativados depois da configuração segura dos serviços.</div>
+  <h2>1. Escolha o modelo</h2>
+  <div class="models" id="models">
+    <button class="model active" data-model="Regata"><div class="shirt">👕</div><strong>Regata</strong><small>Sem mangas</small></button>
+    <button class="model" data-model="Meia manga"><div class="shirt">👕</div><strong>Meia manga</strong><small>Manga curta</small></button>
+    <button class="model" data-model="Manga comprida"><div class="shirt">👕</div><strong>Manga comprida</strong><small>Manga longa</small></button>
+  </div>
+  <div class="card">
+    <h2 style="margin-top:0">2. Escolha a combinação de cores</h2>
+    <label class="field" for="grupoCor">Grupo de cores</label>
+    <select id="grupoCor"><option value="Claras">Tons claros (base branca)</option><option value="Escuras">Tons escuros (base preta)</option></select>
+    <label class="field" for="cor">Cor da camisa</label>
+    <select id="cor"></select>
+    <p class="muted">As fotos específicas de cada combinação serão adicionadas na próxima etapa. Por enquanto, selecione a variação pelo nome.</p>
+    <h2>3. Escolha o tamanho</h2>
+    <div class="choices" id="sizes"></div>
+    <div class="row">
+      <div><label class="field" for="qtd">Quantidade</label><select id="qtd"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>10</option></select></div>
+      <div><label class="field" for="preco">Preço unitário (R$)</label><input id="preco" type="number" min="0" step="0.01" placeholder="Definir preço" value="40"></div>
+    </div>
+    <p class="muted">O preço inicial está como exemplo editável. Confirme os valores reais antes de vender.</p>
+    <button class="btn" id="add">Adicionar ao pedido</button>
+  </div>
+  <h2>4. Seus dados</h2>
+  <div class="card">
+    <div class="row"><div><label class="field" for="nome">Nome completo *</label><input id="nome" autocomplete="name" required placeholder="Seu nome"></div><div><label class="field" for="telefone">Telefone/WhatsApp *</label><input id="telefone" autocomplete="tel" required placeholder="(21) 99999-9999"></div></div>
+    <label class="field" for="email">E-mail *</label><input id="email" type="email" autocomplete="email" required placeholder="voce@email.com">
+    <div class="row"><div><label class="field" for="cpf">CPF (opcional)</label><input id="cpf" inputmode="numeric" placeholder="Somente se necessário"></div><div><label class="field" for="endereco">Endereço (opcional)</label><input id="endereco" autocomplete="street-address" placeholder="Rua, número, bairro"></div></div>
+    <label class="field" for="obs">Observações (opcional)</label><textarea id="obs" rows="2" placeholder="Ex.: personalização, nome na camisa..."></textarea>
+    <p class="muted">A taxa de envio será adicionada ao valor final. Consulte pelo WhatsApp com o administrador responsável.</p>
+  </div>
+  <h2>5. Resumo do pedido</h2>
+  <div class="card"><div id="itens" class="summary">Nenhuma camisa adicionada ainda.</div><p>Total estimado das camisas: <span id="total" class="price">R$ 0,00</span></p><p class="muted">Frete ainda não incluído.</p><button class="btn" id="finalizar">Preparar pedido</button><button class="btn secondary" id="whats">Consultar envio no WhatsApp</button><p id="status" class="muted" role="status"></p></div>
+</main>
+<div class="footer">Grupo Máfia Carioca • Loja virtual<br>Proteja seus dados: não envie informações de pagamento por mensagens não verificadas.</div>
+<script>
+const cores={Claras:["Branca com azul","Branca com preta","Branca com amarela","Branca com verde","Branca com vermelha","Branca com rosa"],Escuras:["Preta com branca","Preta com azul","Preta com verde","Preta com amarela","Preta com vermelha","Preta com rosa"]};
+const state={modelo:"Regata",tamanho:"M",pedido:[]};
+const money=n=>Number(n||0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+const corEl=document.getElementById("cor"),grupoEl=document.getElementById("grupoCor");
+function renderCores(){corEl.innerHTML="";cores[grupoEl.value].forEach(c=>{const o=document.createElement("option");o.value=c;o.textContent=c;corEl.appendChild(o)})}
+function renderSizes(){const box=document.getElementById("sizes");box.innerHTML="";["P","M","G","GG","XG","EXG"].forEach(s=>{const b=document.createElement("button");b.type="button";b.className="choice"+(state.tamanho===s?" active":"");b.textContent=s;b.onclick=()=>{state.tamanho=s;renderSizes()};box.appendChild(b)})}
+document.querySelectorAll(".model").forEach(b=>b.addEventListener("click",()=>{state.modelo=b.dataset.model;document.querySelectorAll(".model").forEach(x=>x.classList.toggle("active",x===b))}));
+grupoEl.addEventListener("change",renderCores);renderCores();renderSizes();
+function update(){const el=document.getElementById("itens");el.textContent=state.pedido.length?state.pedido.map((p,i)=>`${i+1}. ${p.modelo} | ${p.cor} | Tam. ${p.tamanho} | Qtde. ${p.qtd} | ${money(p.preco)} cada`).join("\n"):"Nenhuma camisa adicionada ainda.";const total=state.pedido.reduce((s,p)=>s+p.preco*p.qtd,0);document.getElementById("total").textContent=money(total)}
+document.getElementById("add").onclick=()=>{const preco=Number(document.getElementById("preco").value);const qtd=Number(document.getElementById("qtd").value);if(!Number.isFinite(preco)||preco<=0){alert("Informe um preço válido.");return}state.pedido.push({modelo:state.modelo,cor:corEl.value,tamanho:state.tamanho,qtd,preco});update();document.getElementById("status").textContent="Camisa adicionada ao resumo do pedido."};
+function dadosValidos(){for(const id of ["nome","telefone","email"]){const e=document.getElementById(id);if(!e.value.trim()||!e.checkValidity()){e.focus();alert("Preencha nome, telefone e um e-mail válido.");return false}}if(!state.pedido.length){alert("Adicione pelo menos uma camisa ao pedido.");return false}return true}
+function resumo(){const nome=document.getElementById("nome").value.trim(),tel=document.getElementById("telefone").value.trim(),email=document.getElementById("email").value.trim();const total=state.pedido.reduce((s,p)=>s+p.preco*p.qtd,0);return `PEDIDO - GRUPO MÁFIA CARIOCA\nCliente: ${nome}\nTelefone: ${tel}\nE-mail: ${email}\nCPF: ${document.getElementById("cpf").value.trim()||"Não informado"}\nEndereço: ${document.getElementById("endereco").value.trim()||"Não informado"}\n\n${state.pedido.map((p,i)=>`${i+1}) ${p.modelo}; ${p.cor}; tamanho ${p.tamanho}; quantidade ${p.qtd}; unitário ${money(p.preco)}`).join("\n")}\n\nTotal estimado das camisas: ${money(total)}\nFrete: consultar administrador\nObservações: ${document.getElementById("obs").value.trim()||"Nenhuma"}\n\nATENÇÃO: pedido ainda não pago. Pix real não está ativado nesta versão.`}
+document.getElementById("finalizar").onclick=()=>{if(!dadosValidos())return;const txt=resumo();document.getElementById("status").textContent="Resumo preparado. A integração de pagamento ainda será configurada; nenhum pagamento foi realizado.";const w=window.open("","_blank");if(w){w.document.write("<meta name='viewport' content='width=device-width,initial-scale=1'><title>Resumo do pedido</title><pre style='white-space:pre-wrap;font:15px system-ui;padding:16px;background:#080d14;color:#fff'>"+txt.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]))+"</pre><button onclick='navigator.clipboard.writeText(document.querySelector(\"pre\").innerText)'>Copiar resumo</button>")}else alert(txt)};
+document.getElementById("whats").onclick=()=>{const numero="5521973555126";const msg="Olá! Sou cliente da loja Grupo Máfia Carioca e gostaria de consultar a taxa de envio.";window.open("https://wa.me/"+numero+"?text="+encodeURIComponent(msg),"_blank")};
+</script>
+</body>
+</html>
